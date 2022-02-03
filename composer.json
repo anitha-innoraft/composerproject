@@ -1,0 +1,65 @@
+{
+    "name": "innoraft/composerproject",
+    "description": "Sample project from scratch",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "anitha",
+            "email": "anitha.g@innoraft.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "drupal/core-composer-scaffold": "10.0.x-dev",
+        "composer/installers": "2.x-dev",
+        "drupal/core-recommended": "dev-default",
+        "drupal/core": "9.4.x-dev",
+        "oomphinc/composer-installers-extender": "dev-master",
+        "drupal/webform": "6.1.2",
+        "drupal/captcha": "1.x-dev",
+        "drupal/social_link_field": "1.x-dev",
+        "drupal/libraries": "3.x-dev",
+        "cweagans/composer-patches": "dev-master",
+        "drupal/metatag": "1.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+          "innoraft\\composerproject\\": "web/"
+        }
+      },
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
+    "extra": {
+        "enable-patching": true,
+        "patches": {
+            "drupal/core": {
+                "Plugin Lazy loading can cause usort warning": "https://www.drupal.org/files/issues/2020-06-22/2699157-38.drupal.Plugin-Lazy-loading-can-cause-usort-warning.patch",
+                "Tests not setting X-Requested-With header correctly":"https://www.drupal.org/files/issues/2022-01-17/3258212-11.patch",
+                "checkRequirements to the source plugin":"https://www.drupal.org/files/issues/2021-12-31/3084370-15.patch"
+            },
+            "drupal/metatag":{
+                "Load default 403/404 meta tags when node is used for those pages":"https://www.drupal.org/files/issues/2021-12-30/metatag-load_default_404_tags-2904468-12.patch"
+            }
+         },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+        }
+    }
+}
